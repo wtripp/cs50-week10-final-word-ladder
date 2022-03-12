@@ -48,11 +48,4 @@ def find_chain(start_word, end_word, chain=[]):
     # No chains found    
     return
 
-def display(TODO):
-    for chain in chains:
-        print("[ ", end="")
-        for word in chain:
-            print(word, end =", ")
-        print("]")
-
 find_chain("truck","whine")
