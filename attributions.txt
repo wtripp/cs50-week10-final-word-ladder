@@ -4,3 +4,5 @@ Wordle answers: https://docs.google.com/spreadsheets/d/1pS_rkbDdoixaO1aFeRrffzet
 
 Build a Wordle clone tutorial:
 https://www.freecodecamp.org/news/build-a-wordle-clone-in-javascript/
+
+Ladder icon: https://iconduck.com/
