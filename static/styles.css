@@ -1,0 +1,28 @@
+.container {
+    padding: 5px;
+}
+
+.navbar-brand {
+    font-size: 30px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+input {
+    text-transform: uppercase;
+    display: table;
+    text-align: center;
+    margin: 15px auto;
+    border: 1px solid rgb(50, 50, 50);
+}
+
+input[disabled] {
+    background-color: lightgray;
+}
