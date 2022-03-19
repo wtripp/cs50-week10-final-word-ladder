@@ -23,6 +23,4 @@ input {
     border: 1px solid rgb(50, 50, 50);
 }
 
-input[disabled] {
-    background-color: lightgray;
-}
+:disabled { background-color: lightgray }

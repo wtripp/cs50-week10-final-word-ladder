@@ -1,8 +1,0 @@
-Attribution for Wordle word list: New York Times
-
-Wordle answers: https://docs.google.com/spreadsheets/d/1pS_rkbDdoixaO1aFeRrffzetm7Hqz4NKcDGrArs3ufE/edit#gid=0
-
-Build a Wordle clone tutorial:
-https://www.freecodecamp.org/news/build-a-wordle-clone-in-javascript/
-
-Ladder icon: https://iconduck.com/
