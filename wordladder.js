@@ -1,52 +1,68 @@
+// Create boxes
 const form = document.querySelector("form")
 const NUM_BOXES = 6;
+const boxes = createGameBoxes(form,NUM_BOXES);
 
-for (let i = 0; i < NUM_BOXES; i++) {
-    let input = document.createElement("input")
-    if (i != 0) {
-        input.setAttribute("disabled","disabled");
-    }
-    input.setAttribute("maxlength", "5");
-    input.setAttribute("pattern", "[A-Za-z]*");
-    input.setAttribute("type", "text");
-    input.setAttribute("size", "10");
-    form.append(input);
-}
+// Enable first box
+boxes[0].removeAttribute("disabled");
+boxes[0].focus()
 
-const inputs = document.querySelectorAll("input");
-inputs[0].focus();
+// Check guess
+for (const box of boxes) {
 
-for (let i = 0; i < NUM_BOXES; i++) {
-    let input = inputs[i];
-    input.addEventListener("keypress", (event)=> {
+    box.addEventListener("keypress",(event)=> {
+
+        // Check answer when user presses "Enter".
         if (event.key === "Enter" || event.keyCode === 13) {
-            guess = input.value.toUpperCase();
-            answer = document.getElementById("endWord").innerHTML;
-
-            if (guess === answer) {
-                input.style.backgroundColor = "lightgreen";
-            }
-            else if (i+1 < NUM_BOXES) {
-                let next = inputs[i+1];
-                next.removeAttribute("disabled");
-                next.focus();
-                input.style.backgroundColor = "lightgray";
-            }
-            else {
-                input.style.backgroundColor = "lightcoral";
-
-            }
-            input.setAttribute("disabled","disabled");
+            checkGuess(box);
         }
     });
-
-
 }
 
 
-/*
-const inputs = document.querySelectorAll("input");
-for (let input of inputs) {
-    console.log(input.value);
+// *** HELPER FUNCTIONS *** //
+
+function createGameBoxes(form,n) {
+    
+    for (let i = 0; i < n; i++) {
+
+        let box = document.createElement("input")
+
+        box.setAttribute("maxlength", "5");
+        box.setAttribute("pattern", "[A-Za-z]*");
+        box.setAttribute("type", "text");
+        box.setAttribute("size", "10");
+        box.setAttribute("disabled","disabled");
+
+        form.append(box);
+    }
+
+    return document.querySelectorAll("input")
 }
-*/
+
+
+function checkGuess(box) {
+
+    // Win: Correct guess.
+    guess = box.value.toUpperCase();
+    answer = document.getElementById("endWord").innerHTML;
+    if (guess === answer) {
+        box.style.backgroundColor = "lightgreen";
+    }
+
+    // Loss: Incorrect guess on last box.
+    else if (box === form.lastChild) {
+        box.style.backgroundColor = "lightcoral";
+    }
+
+    // Continue: Incorrect guess. Move to next box.
+    else {
+        box.style.backgroundColor = "lightgray";
+        let nextBox = box.nextSibling;
+        nextBox.removeAttribute("disabled");
+        nextBox.focus();
+    }
+
+    // Disable box.
+    box.setAttribute("disabled","disabled");
+}
