@@ -72,7 +72,7 @@ function validateGuess(box) {
         message = "TOO MANY LETTERS";
     }
 
-    if (guess.match(/[A-Za-z]*/g)) {
+    if (guess.match(/[A-Za-z]/g) === guess.split("")) {
         message = "ONLY LETTERS ALLOWED";
     }
 
@@ -132,3 +132,5 @@ function processGuess(box) {
     // Disable box.
     box.setAttribute("disabled","disabled");
 }
+
+
