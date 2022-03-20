@@ -17,8 +17,13 @@ for (const box of boxes) {
         // Check answer when user presses "Enter".
         if (event.key === "Enter" || event.keyCode === 13) {
 
-            validateGuess(box);
-            processGuess(box);
+            let isValid = validateGuess(box);
+            if (isValid) {
+                processGuess(box);
+            }
+            else {
+                box.value = "";
+            }
         }
     });
 }
@@ -31,9 +36,8 @@ function createGameBoxes(form,n) {
     for (let i = 0; i < n; i++) {
 
         let box = document.createElement("input")
-
-        box.setAttribute("maxlength", "5");
-        box.setAttribute("pattern", "[A-Za-z]*");
+        box.setAttribute("maxlength", WORD_LENGTH);
+        box.setAttribute("onkeypress", "lettersOnly(event)")
         box.setAttribute("type", "text");
         box.setAttribute("size", "10");
         box.setAttribute("disabled","disabled");
@@ -44,32 +48,63 @@ function createGameBoxes(form,n) {
     return document.querySelectorAll("input")
 }
 
+function lettersOnly(event) {
 
-function validateGuess(box) {
+    let char = String.fromCharCode(event.which);
 
-    guess = box.value;
-    time = 3000; // ms
-
-    if (guess.length < WORD_LENGTH) {
-        displayMessage('NOT ENOUGH LETTERS',time);
+    if(/[^A-Za-z]/.test(char)) {
+        event.preventDefault();
     }
 }
 
 
-function displayMessage(message,time) {
-    const para = document.createElement("p");
-    para.classList.add("message-box");
-    para.innerHTML = `${message}`;
+function validateGuess(box) {
 
-    messageContainer.appendChild(para);
-    para.classList.add("fadeOut");
+    let guess = box.value;
+    let time = 2000; // ms
+    let message = "";
 
-    setTimeout(() => {
-        messageContainer.removeChild(para);
-    }, time);
-    
+    if (guess.length < WORD_LENGTH) {
+        message = "NOT ENOUGH LETTERS";
+    }
+
+    if (guess.length > WORD_LENGTH) {
+        message = "TOO MANY LETTERS";
+    }
+
+    if (guess.match(/[A-Za-z]*/g)) {
+        message = "ONLY LETTERS ALLOWED";
+    }
+
+    // TODO: WORD NOT IN WORD LIST    
+
+    // TODO: WORD MUST DIFFER BY ONE LETTER
+
+    if (message) {
+        box.setAttribute("disabled","disabled");
+        displayMessage(message,time);
+        box.removeAttribute("disabled");
+        return false
+    }
+
+    return true; 
+
 }
 
+
+function displayMessage(message,time) {
+
+        const para = document.createElement("p");
+        para.classList.add("message-box");
+        para.innerHTML = `${message}`;
+
+        messageContainer.appendChild(para);
+        para.classList.add("fadeOut");
+        
+        setTimeout(() => {
+            messageContainer.removeChild(para);
+        }, time);
+}
 
 
 function processGuess(box) {

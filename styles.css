@@ -27,43 +27,31 @@ input {
 
 
 #message-container{
+    margin: auto;
     position: fixed;
-    top:20%;
-    right: 50%;
+    font-size: 15px;
     width: 300px;
     display: flex;
+    right: 50%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
 }
 
 .message-box {
-    padding: 1.5rem 1rem;
+    padding: 0.5rem 0.25rem;
     margin: 0.5rem;
-    width: 300px;
     border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0,0,0, 0.7);
+    background-color:black;
     color:white;
-    animation: fade-in 3s ease ;
+    animation: fadeinout 2s ease;
 }
 
-
-/* Credit: https://github.com/PracticalCodeAcademy/snackbar-flashing-messages */
 .fadeout{
-    animation: fade-out 1s ease 2s forwards;
+    animation: fadeinout 1s ease 2s forwards;
 }
 
-@keyframes fade-in{
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-
-@keyframes fade-out{
-    0%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
+@keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
