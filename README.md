@@ -1,5 +1,5 @@
 # Word Ladder
-#### Video Demo:  <URL HERE>
+#### Video Demo:  https://www.youtube.com/watch?v=JVqcIJJSJTQ
 #### Description: A game where you transform the start word to the end word one letter at a time.
 
 "Word Ladder" is a popular kid's game often taught in reading classes. The rules are simple: Given a start word and an end word with the same number of letters, transform the start word to the end word by changing one letter at a time.
